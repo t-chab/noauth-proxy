@@ -47,7 +47,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>name.chabs.ProxyApp</mainClass>
+                            <mainClass>name.chabs.proxyapp.ProxyApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,24 +1,24 @@
-package name.chabs;
+package name.chabs.proxyapp.beans;
 
 import java.net.URL;
 
 /**
- * Config
+ * POJO which contains configuration properties
  */
-class ConfigBean {
+public class ConfigBean {
     private final URL proxyUrl;
     private final int proxyPort;
 
-    ConfigBean(URL url, int port) {
+    public ConfigBean(URL url, int port) {
         proxyUrl = url;
         proxyPort = port;
     }
 
-    URL getProxyUrl() {
+    public URL getProxyUrl() {
         return proxyUrl;
     }
 
-    int getProxyPort() {
+    public int getProxyPort() {
         return proxyPort;
     }
 }
