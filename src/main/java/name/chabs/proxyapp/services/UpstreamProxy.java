@@ -1,4 +1,4 @@
-package name.chabs.proxyapp;
+package name.chabs.proxyapp.services;
 
 import io.netty.handler.codec.http.HttpObject;
 import io.netty.handler.codec.http.HttpRequest;
