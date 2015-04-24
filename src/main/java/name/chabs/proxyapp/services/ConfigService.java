@@ -13,7 +13,9 @@ public interface ConfigService {
 
     int DEFAULT_LISTEN_PORT = 8888;
 
-    String CONFIG_FILE_NAME = "proxy-app.properties";
+    String CONFIG_FILE_NAME = "proxy-app";
+    String CONFIG_FILE_SUFFIX = "properties";
+    String CONFIG_FILE = CONFIG_FILE_NAME + CONFIG_FILE_SUFFIX;
     String USER_HOME = System.getProperty("user.home");
 
     String OPTION_URL = "proxy-url";

@@ -79,11 +79,11 @@ public class ConfigServiceImpl implements ConfigService {
         CommandLineParser cmdLineParser = new PosixParser();
 
         Options cmdOptions = new Options();
-        cmdOptions.addOption(OptionBuilder.withLongOpt("proxy-url")
+        cmdOptions.addOption(OptionBuilder.withLongOpt(OPTION_URL)
                 .withDescription(OPTION_URL_HELP)
                 .withType(URL.class)
                 .hasArg()
-                .withArgName("proxy-url")
+                .withArgName(OPTION_URL)
                 .create());
         cmdOptions.addOption(OptionBuilder.withLongOpt(OPTION_PORT)
                 .withDescription(OPTION_PORT_HELP)
