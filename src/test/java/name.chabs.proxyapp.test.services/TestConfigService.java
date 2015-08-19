@@ -19,20 +19,18 @@ import java.nio.file.Paths;
  */
 public class TestConfigService {
 
-    private final static int BIND_PORT_TEST = 58555;
-    private final static String URL_TEST = "http://login:password@some.proxy.url:8000";
+    private static final int BIND_PORT_TEST = 58555;
+    private static final String URL_TEST = "http://login:password@some.proxy.url:8000";
+    private static final String LS = System.getProperty("line.separator");
 
     @Test
     public void testLoadConfigFromFile() {
         ConfigService configService = new ConfigServiceImpl();
         try {
             final File file = File.createTempFile(ConfigService.CONFIG_FILE_NAME, ConfigService.CONFIG_FILE_SUFFIX);
-            final StringBuilder configuration = new StringBuilder(256);
-            configuration.append(ConfigService.CONF_PROXY_APP_PORT).append('=').append(BIND_PORT_TEST);
-            configuration.append(ConfigService.CONF_PROXY_APP_URL).append('=').append(URL_TEST);
-            Files.write(Paths.get(file.getPath()), configuration.toString().getBytes());
+            Files.write(Paths.get(file.getPath()), (ConfigService.CONF_PROXY_APP_PORT + '=' + BIND_PORT_TEST + LS + ConfigService.CONF_PROXY_APP_URL + '=' + URL_TEST + LS).getBytes());
             ConfigBean config = configService.loadConfiguration(file);
-            Assert.assertEquals(URL_TEST, config.getProxyUrl());
+            Assert.assertEquals(URL_TEST, config.getProxyUrl().toString());
             Assert.assertEquals(BIND_PORT_TEST, config.getProxyPort());
         } catch (IOException e) {
             Assert.fail("Unable to create sample configuration file.", e);
@@ -44,14 +42,14 @@ public class TestConfigService {
     @Test
     public void testLoadConfigFromArgs() {
         ConfigService configService = new ConfigServiceImpl();
-        final String[] configData = new String[]{ConfigService.OPTION_URL + '=' + URL_TEST,
-                ConfigService.OPTION_PORT + '=' + BIND_PORT_TEST};
+        final String[] configData = new String[]{"--" + ConfigService.OPTION_URL + '=' + URL_TEST,
+                "--" + ConfigService.OPTION_PORT + '=' + BIND_PORT_TEST};
         try {
             ConfigBean config = configService.loadConfiguration(configData);
-            Assert.assertEquals(URL_TEST, config.getProxyUrl());
+            Assert.assertEquals(URL_TEST, config.getProxyUrl().toString());
             Assert.assertEquals(BIND_PORT_TEST, config.getProxyPort());
         } catch (ConfigException e) {
-            Assert.fail("Unable to load configuration from sample file", e);
+            Assert.fail("Unable to load configuration from sample command line.", e);
         }
     }
 }

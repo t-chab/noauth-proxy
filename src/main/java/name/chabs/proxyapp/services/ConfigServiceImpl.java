@@ -87,7 +87,7 @@ public class ConfigServiceImpl implements ConfigService {
                 .create());
         cmdOptions.addOption(OptionBuilder.withLongOpt(OPTION_PORT)
                 .withDescription(OPTION_PORT_HELP)
-                .withType(Integer.class)
+                .withType(Number.class)
                 .hasArg()
                 .withArgName(OPTION_PORT)
                 .create());
@@ -112,10 +112,11 @@ public class ConfigServiceImpl implements ConfigService {
             throw new ConfigException(CONFIGURATION_WRONG_URL_VALUE, e);
         }
 
-        Integer port = DEFAULT_LISTEN_PORT;
+        long port = DEFAULT_LISTEN_PORT;
         try {
             if (cmdLine.hasOption(OPTION_PORT)) {
-                port = (Integer) cmdLine.getParsedOptionValue(OPTION_PORT);
+                // FIXME: Should be able to cast into an int, not a long
+                port = (Long) cmdLine.getParsedOptionValue(OPTION_PORT);
             }
         } catch (ParseException e) {
             logger.warn("Unable to parse {} option : {} - using default value {}", OPTION_PORT,
@@ -123,7 +124,7 @@ public class ConfigServiceImpl implements ConfigService {
         }
 
         if (proxyUrl != null) {
-            lConf = new ConfigBean(proxyUrl, port);
+            lConf = new ConfigBean(proxyUrl, (int) port);
         }
 
         return lConf;

@@ -14,7 +14,7 @@ public interface ConfigService {
     int DEFAULT_LISTEN_PORT = 8888;
 
     String CONFIG_FILE_NAME = "proxy-app";
-    String CONFIG_FILE_SUFFIX = "properties";
+    String CONFIG_FILE_SUFFIX = ".properties";
     String CONFIG_FILE = CONFIG_FILE_NAME + CONFIG_FILE_SUFFIX;
     String USER_HOME = System.getProperty("user.home");
 
@@ -41,7 +41,7 @@ public interface ConfigService {
     /**
      * Load proxy configuration from properties file specified.
      *
-     * @param {@link File} file which contains configuration property to load
+     * @param file {@link File} which contains configuration property to load
      * @return ConfigBean if it could be loaded, null otherwise.
      */
     ConfigBean loadConfiguration(File file) throws ConfigException;

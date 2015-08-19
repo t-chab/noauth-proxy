@@ -29,12 +29,11 @@ public class ProxyServiceImpl implements ProxyService {
 
     public void launchForwardProxy(int port, URL targetProxy) {
         if (targetProxy == null || (port < 1) || (port > 65535)) {
-            throw new IllegalArgumentException("No URL or invalide port number");
+            throw new IllegalArgumentException("No URL or invalid port number");
         }
 
-        int listenPort = port;
         DefaultHttpProxyServer.bootstrap()
-                .withPort(listenPort)
+                .withPort(port)
                 .withChainProxyManager(chainedProxyManager(targetProxy))
                 .start();
     }
